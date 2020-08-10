@@ -1,0 +1,92 @@
+macro "Select a ROI and Measure Action Tool- C555T1d13BT9d13"{
+//improve to do it in every channel
+
+var norm_value = newArray(1.156249439, 1.206023638, 0.86341834, 1.02319906, 0.909479472, 0.847167408, 1.020778149, 1.097850969);
+
+path = getDirectory("Choose a Directory");
+filename = getFileList(path);
+newDir = path + "Output" + File.separator;
+File.makeDirectory(newDir);
+
+setBatchMode(true);
+
+for (i=0; i<filename.length; i++) {
+
+        open(path+filename[i]);
+        //run("Multiply...", "value"=norm_value[i]);
+        //run("Multiply...", "value=1.25000");
+        //saveAs("tiff", newDir + "Result of " + filename[i]);
+        //close();
+
+        selectWindow("ROI Manager");
+
+		roiManager("select", i);
+		run("Make Inverse");
+                run("Fill", "slice");
+                saveAs("tiff", newDir + "Result of " + filename[i]);
+
+        //run("Measure");
+        //close();
+}
+
+//selectWindow("Results");
+//saveAs("Measurements", newDir + "Measurements"+".xls");
+//run("Close");
+
+
+macro "NEXT STANDARD Action Tool- C555T1d13BT9d13"{
+
+path = getDirectory("Choose a Directory");
+filename = getFileList(path);
+newDir = path + "Strong" + File.separator;
+newDir2 = path + "Normal" + File.separator;
+File.makeDirectory(newDir);
+File.makeDirectory(newDir2);
+setBatchMode(true);
+
+for (i=0; i<filename.length; i++) {
+
+        open(path+filename[i]);
+        //run("Multiply...", "value"=norm_value[i]);
+        //run("Multiply...", "value=1.25000");
+        //saveAs("tiff", newDir + "Result of " + filename[i]);
+        //close();
+        run("Split Channels");
+                close();
+        run("8-bit");
+        run("Green");
+        saveAs("Tiff", newDir+ filename[i]);
+        close();
+        
+        run("8-bit");
+        run("Green");
+        saveAs("Tiff", newDir2+ filename[i]);
+}
+}
+
+
+
+macro "MERGE FROM FODLERS Action Tool- C9788LLd13BT9d13"{
+//does not work so good for some reason
+path_green = getDirectory("Choose the GREEN Channel Directory");
+filename_green = getFileList(path_green);
+path_red = getDirectory("Choose the RED Channel Directory");
+filename_red = getFileList(path_red);
+newDir = path_green + "RG" + File.separator;
+File.makeDirectory(newDir);
+
+setBatchMode(true);
+
+for (i=0; i<filename_green.length; i++) {
+
+        open(path_green+filename_green[i]);
+        rename("green");
+        open(path_red+filename_red[i]);
+        rename("red");
+                
+                run("Merge Channels...", "c1=red c2=green create");
+        //run("Merge Channels...", "c1=["+filename_red[i]+"] c2=["+filename_green[i]+"] create");
+        saveAs("Tiff", newDir+ filename_green[i]);
+        close();
+}
+}

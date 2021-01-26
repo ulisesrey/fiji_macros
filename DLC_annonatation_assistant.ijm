@@ -14,11 +14,13 @@ slice=getResult("Slice", i)-1;
 //this does not work always, depending on the max number of frames more zeros need to be added
 //This should be improved. For the time being post correct with the DLC_useful_functions.ipynb, section Annotation Add Zeros.
 //Make sure to modify the all the images filenames as well as Collected_Data.csv.
-if (slice<10){
-	slice="00"+slice;
-	}else if (slice<100){
+max_len_number=6;
+
+while len(slice) < max_len_number){
 	slice="0"+slice;
-	}
+}
+
+
 //filename="img"+slice+".png";
 filename="img"+slice+".tif";
 setResult("coords", i,  "labeled-data/" +video_name+"/"+filename);

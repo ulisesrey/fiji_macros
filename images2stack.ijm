@@ -4,10 +4,8 @@ Array.sort(filename);
 
 //Array.print(filename);
 
-newDir = path + "Output" + File.separator;
-File.makeDirectory(newDir);
 
-setBatchMode(true);
+//setBatchMode(true);
 
 for (i=0; i<filename.length; i++) {
 
@@ -15,5 +13,9 @@ for (i=0; i<filename.length; i++) {
 
 }
 run("Images to Stack", "name=Stack title=[] use");
-saveAs("tiff", newDir + "Result of " + filename[i-1]);
-print(“end")
+
+//want to save?
+//newDir = path + "Output" + File.separator;
+//File.makeDirectory(newDir);
+//saveAs("tiff", newDir + "Result of " + filename[i-1]);
+print("end");

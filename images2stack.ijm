@@ -5,7 +5,7 @@ Array.sort(filename);
 //Array.print(filename);
 
 
-//setBatchMode(true);
+setBatchMode(true);
 
 for (i=0; i<filename.length; i++) {
 
@@ -13,6 +13,8 @@ for (i=0; i<filename.length; i++) {
 
 }
 run("Images to Stack", "name=Stack title=[] use");
+
+setBatchMode(false);
 
 //want to save?
 //newDir = path + "Output" + File.separator;

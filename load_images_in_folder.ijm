@@ -20,13 +20,19 @@ roiManager("deselect")
 setBatchMode(false);
 //var done = false
 for (i=0; i<filename.length; i++) {
+		//if (i<290){ continue;}
+
 		//some printing
 		print(i);
 		print(filename[i]);
 
 		//Open file
         open(path+filename[i]);
-        waitForUser("Select a roi", "MOTHERFUCKER");
+        run("In [+]");
+		run("In [+]");
+		run("In [+]");
+        roiManager("Select", i);
+        waitForUser("Select a roi", "~");
         roiManager("Add");
         close("*");
         

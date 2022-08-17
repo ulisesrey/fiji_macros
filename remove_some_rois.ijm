@@ -20,7 +20,7 @@ setBatchMode(false);
 //var done = false
 print("now entering the loop")
 for (i=0; i<filename.length; i++) {
-		if (i<13){ continue;}
+		if (i<58){ continue;}
 
 		//some printing
 		print(i);
@@ -48,7 +48,7 @@ for (i=0; i<filename.length; i++) {
 			print("Current Roi will be deleted");
 			roiManager("delete");
 			deleted_rois_counter=deleted_rois_counter+1;
-			roi_index=i+deleted_rois_counter;
+			//roi_index=i+deleted_rois_counter;
 			print(roi_index);
         	roiManager("Select", roi_index);
 	        roiManager("rename", filename[i])

@@ -1,8 +1,5 @@
-//Ulises Rey Zimmer Lab 2021
-//This script loops through the files in one directory and selects the i ROI from the ROI manager and Fills it.
-//It is used in the context of preparing U-net training data.
-//It overwrites the data!
-//It could be adapted to do any other operation
+//Ulises Rey Zimmer Lab 2022
+
 
 
 //Select Directory
@@ -31,9 +28,11 @@ for (i=0; i<filename.length; i++) {
         run("In [+]");
 		run("In [+]");
 		run("In [+]");
-        roiManager("Select", i);
+        //roiManager("Select", i);
         waitForUser("Select a roi", "~");
         roiManager("Add");
+        roiManager("Select", i);
+        roiManager("rename", filename[i])
         close("*");
         
 

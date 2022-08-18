@@ -33,7 +33,9 @@ for (i=0; i<filename.length; i++) {
 		//Open file
         open(path+filename[i]);
         open(path2+filename2[i]);
-        run("Merge Channels...", "c1="+filename[i] + " c2="+filename2[i] + " create");
+        //get title of filename2 in case it is repeated
+        filename2_new=getTitle();
+        run("Merge Channels...", "c1="+filename[i] + " c2="+filename2_new + " create");
         run("In [+]");
 		run("In [+]");
 		run("In [+]");

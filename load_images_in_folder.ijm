@@ -1,6 +1,8 @@
 //Ulises Rey Zimmer Lab 2022
+// helper script to annotate masks to generate training data for unet segmentation of coiled shapes
 
-
+two_folders=true
+annotate=true
 
 //Select Directory of image and label (mask)
 path = getDirectory("Choose the image Directory");
@@ -9,11 +11,15 @@ print(path);
 //Sort files
 Array.sort(filename);
 
+
+//if second folder uncomment code below
+if (two_folders){
 path2 = getDirectory("Select the label Directory");
 filename2 = getFileList(path2);
 print(path2);
 //Sort files
 Array.sort(filename2);
+}
 
 
 //Close any file
@@ -24,7 +30,9 @@ roiManager("deselect")
 setBatchMode(false);
 //var done = false
 for (i=0; i<filename.length; i++) {
-		//if (i<290){ continue;}
+		//if (i<139){
+		//	print("ATTENTION, SKIPPING SOME FRAMES");
+		//	continue;}
 
 		//some printing
 		print(i);
@@ -32,18 +40,30 @@ for (i=0; i<filename.length; i++) {
 
 		//Open file
         open(path+filename[i]);
+        
+        //if two folders
+        if (two_folders){
         open(path2+filename2[i]);
         //get title of filename2 in case it is repeated
         filename2_new=getTitle();
-        run("Merge Channels...", "c1="+filename[i] + " c2="+filename2_new + " create");
+        run("Merge Channels...", "c6="+filename[i] + " c2="+filename2_new + " create keep");
+        }
+        //end of if two folders
+        
         run("In [+]");
 		run("In [+]");
 		run("In [+]");
-        //roiManager("Select", i);
+		run("In [+]");
+		//run("In [+]");
+		//run("In [+]");
         waitForUser("Select a roi", "~");
+		if (annotate){
+        //roiManager("Select", i);
+
         roiManager("Add");
         roiManager("Select", i);
         roiManager("rename", filename[i])
+		}
         close("*");
         
 

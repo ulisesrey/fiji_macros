@@ -30,7 +30,7 @@ for (i=0; i<filename.length; i++) {
         //Select ROI
         roiManager("Select", i);
         //Fill ROI
-        roiManager("Set Line Width", 4);
+        roiManager("Set Line Width", 5);
         roiManager("fill")
         //Save Image as Tiff (It will overwrite)
         saveAs("tiff", path +filename[i]);
